@@ -1,0 +1,242 @@
+esphome:
+  name: ir-tx
+  friendly_name: IR_TX
+
+esp32:
+  # Adjust according to your hardware <adjust-according-to-your-setup>
+  board: esp32-c3-devkitm-1
+  framework:
+    type: esp-idf
+
+# Enable logging
+logger:
+  level: VERBOSE
+
+# Enable Home Assistant API
+api:
+  encryption:
+    key: "<adjust-according-to-your-setup>"
+
+ota:
+  - platform: esphome
+    password: "<adjust-according-to-your-setup>"
+
+# Feature to also connect a IR receiver to the board to record signals.
+# If actrivated, the signals (hex) will be printed to the log.
+# The receiving toolkit provided several protocols. Some require inverted
+# signal. Receiver from Arduino set box needed inverted.
+# Mode Pioneer from the logs worked best
+# So, uncomment to enable receiver log
+#remote_receiver:
+#  pin:
+#    number: GPIO4
+#    inverted: true
+#  dump: all
+
+remote_transmitter:
+  pin: GPIO5
+  carrier_duty_percent: 50%
+
+button:
+  - platform: template
+    name: "Power On"
+    on_press:
+      - remote_transmitter.transmit_pioneer:
+          rc_code_1: 0x005C
+  - platform: template
+    name: "Power Off"
+    on_press:
+      - remote_transmitter.transmit_pioneer:
+          rc_code_1: 0x0040
+  - platform: template
+    name: "Light red1"
+    on_press:
+      - remote_transmitter.transmit_pioneer:
+          rc_code_1: 0x0058
+  - platform: template
+    name: "Light red2"
+    on_press:
+      - remote_transmitter.transmit_pioneer:
+          rc_code_1: 0x0054
+  - platform: template
+    name: "Light red3"
+    on_press:
+      - remote_transmitter.transmit_pioneer:
+          rc_code_1: 0x0050
+  - platform: template
+    name: "Light orange"
+    on_press:
+      - remote_transmitter.transmit_pioneer:
+          rc_code_1: 0x001C
+  - platform: template
+    name: "Light yellow"
+    on_press:
+      - remote_transmitter.transmit_pioneer:
+          rc_code_1: 0x0018
+  - platform: template
+    name: "Light green1"
+    on_press:
+      - remote_transmitter.transmit_pioneer:
+          rc_code_1: 0x0059
+  - platform: template
+    name: "Light green2"
+    on_press:
+      - remote_transmitter.transmit_pioneer:
+          rc_code_1: 0x0055
+  - platform: template
+    name: "Light green3"
+    on_press:
+      - remote_transmitter.transmit_pioneer:
+          rc_code_1: 0x0051
+  - platform: template
+    name: "Light green4"
+    on_press:
+      - remote_transmitter.transmit_pioneer:
+          rc_code_1: 0x001D
+  - platform: template
+    name: "Light cyan"
+    on_press:
+      - remote_transmitter.transmit_pioneer:
+          rc_code_1: 0x0019
+  - platform: template
+    name: "Light blue1"
+    on_press:
+      - remote_transmitter.transmit_pioneer:
+          rc_code_1: 0x0045
+  - platform: template
+    name: "Light blue2"
+    on_press:
+      - remote_transmitter.transmit_pioneer:
+          rc_code_1: 0x0049
+  - platform: template
+    name: "Light blue3"
+    on_press:
+      - remote_transmitter.transmit_pioneer:
+          rc_code_1: 0x004D
+  - platform: template
+    name: "Light blue4"
+    on_press:
+      - remote_transmitter.transmit_pioneer:
+          rc_code_1: 0x001E
+  - platform: template
+    name: "Light purple"
+    on_press:
+      - remote_transmitter.transmit_pioneer:
+          rc_code_1: 0x001A
+  - platform: template
+    name: "Light white"
+    on_press:
+      - remote_transmitter.transmit_pioneer:
+          rc_code_1: 0x0044
+  - platform: template
+    name: "Program rainbow"
+    on_press:
+      - remote_transmitter.transmit_pioneer:
+          rc_code_1: 0x0048
+  - platform: template
+    name: "Program meteor"
+    on_press:
+      - remote_transmitter.transmit_pioneer:
+          rc_code_1: 0x004C
+  - platform: template
+    name: "Program stars"
+    on_press:
+      - remote_transmitter.transmit_pioneer:
+          rc_code_1: 0x001F
+  - platform: template
+    name: "Program fire"
+    on_press:
+      - remote_transmitter.transmit_pioneer:
+          rc_code_1: 0x001B
+  - platform: template
+    name: "Mode up"
+    on_press:
+      - remote_transmitter.transmit_pioneer:
+          rc_code_1: 0x0014
+  - platform: template
+    name: "Mode switch"
+    on_press:
+      - remote_transmitter.transmit_pioneer:
+          rc_code_1: 0x0010
+  - platform: template
+    name: "Mode down"
+    on_press:
+      - remote_transmitter.transmit_pioneer:
+          rc_code_1: 0x000C          
+  - platform: template
+    name: "Fav up"
+    on_press:
+      - remote_transmitter.transmit_pioneer:
+          rc_code_1: 0x0015
+  - platform: template
+    name: "Fav switch"
+    on_press:
+      - remote_transmitter.transmit_pioneer:
+          rc_code_1: 0x0011
+  - platform: template
+    name: "Fav down"
+    on_press:
+      - remote_transmitter.transmit_pioneer:
+          rc_code_1: 0x000D
+  - platform: template
+    name: "Tune up"
+    on_press:
+      - remote_transmitter.transmit_pioneer:
+          rc_code_1: 0x0017
+  - platform: template
+    name: "Tune down"
+    on_press:
+      - remote_transmitter.transmit_pioneer:
+          rc_code_1: 0x0016
+  - platform: template
+    name: "Dim up"
+    on_press:
+      - remote_transmitter.transmit_pioneer:
+          rc_code_1: 0x0013
+  - platform: template
+    name: "Dim down"
+    on_press:
+      - remote_transmitter.transmit_pioneer:
+          rc_code_1: 0x0012
+  - platform: template
+    name: "Length longer"
+    on_press:
+      - remote_transmitter.transmit_pioneer:
+          rc_code_1: 0x000F
+  - platform: template
+    name: "Length shorter"
+    on_press:
+      - remote_transmitter.transmit_pioneer:
+          rc_code_1: 0x000E
+  - platform: template
+    name: "Music up"
+    on_press:
+      - remote_transmitter.transmit_pioneer:
+          rc_code_1: 0x0009
+  - platform: template
+    name: "Music down"
+    on_press:
+      - remote_transmitter.transmit_pioneer:
+          rc_code_1: 0x0008
+  - platform: template
+    name: "Music switch"
+    on_press:
+      - remote_transmitter.transmit_pioneer:
+          rc_code_1: 0x000A
+  - platform: template
+    name: "Color switch"
+    on_press:
+      - remote_transmitter.transmit_pioneer:
+          rc_code_1: 0x000B
+
+wifi:
+  ssid: !secret wifi_ssid
+  password: !secret wifi_password
+
+  # Enable fallback hotspot (captive portal) in case wifi connection fails
+  ap:
+    ssid: "Ir-Tx Fallback Hotspot"
+    password: "<adjust-according-to-your-setup_in-case-you-need-it>"
+
+captive_portal:
+    
