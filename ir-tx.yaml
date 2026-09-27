@@ -19,7 +19,7 @@ api:
 
 ota:
   - platform: esphome
-    password: "<adjust-according-to-your-setup>"
+    encryption:
 
 # Feature to also connect a IR receiver to the board to record signals.
 # If actrivated, the signals (hex) will be printed to the log.
@@ -36,6 +36,7 @@ ota:
 remote_transmitter:
   pin: GPIO5
   carrier_duty_percent: 50%
+  non_blocking: true
 
 button:
   - platform: template
@@ -238,5 +239,12 @@ wifi:
     ssid: "Ir-Tx Fallback Hotspot"
     password: "<adjust-according-to-your-setup_in-case-you-need-it>"
 
+sensor:
+  - platform: internal_temperature
+    name: "IR Transmitter Internal Temperature"
+    update_interval: 60s
+    unit_of_measurement: "°C"
+    device_class: "temperature"
+    
 captive_portal:
     
